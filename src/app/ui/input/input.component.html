@@ -1,0 +1,13 @@
+<div class="flex gap-2 flex-col">
+  <label>{{ label }}</label>
+  <input
+    [type]="type"
+    class="p-2 shadow-md rounded border"
+    [formControl]="control"
+    [placeholder]="label"
+    appEnterKey
+    (enterPressed)="enterPressed.emit()" />
+  @if (control.invalid && control.touched) {
+  <div class="text-danger">This field is required.</div>
+  }
+</div>

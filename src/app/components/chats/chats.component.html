@@ -1,0 +1,13 @@
+@if (loading()) {
+<h1>loading...</h1>
+} @else {
+<h1 class="text-3xl font-bold underline mb-4">Chats to join</h1>
+<div class="flex gap-4">
+  @for (chat of chats(); track chat.id) {
+  <app-chat-item [chat]="chat"></app-chat-item>
+  } @empty {
+  <h2>No chats found.. Try again later</h2>
+  }
+</div>
+
+}

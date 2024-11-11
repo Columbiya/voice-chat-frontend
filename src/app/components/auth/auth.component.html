@@ -1,0 +1,10 @@
+<div
+  class="max-w-[700px] p-4 shadow-md bg-white absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+  <app-input
+    (valueChange)="username.set($event)"
+    label="What's your name?"
+    (enterPressed)="login()"></app-input>
+  <!-- <input placeholder="What's your name?" [formControl]="username" /> -->
+
+  <button (click)="login()" class="mt-2">Login</button>
+</div>

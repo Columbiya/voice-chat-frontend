@@ -1,0 +1,20 @@
+<div class="flex gap-6 mb-4">
+  @for (user of chatUsers(); track user.id) {
+  <app-chat-user [user]="user"></app-chat-user>
+  }
+</div>
+
+<button
+  (click)="toggleMic()"
+  class="border border-cyan-500 relative bg-white p-1"
+  title="{{ isMicOn() ? 'Disable' : 'Enable' }} microphone">
+  <img
+    [src]="isMicOn() ? '/assets/mic.svg' : '/assets/muted-mic.png'"
+    class="max-w-[24px]"
+    alt="microphone {{ isMicOn() ? 'on' : 'off' }}" />
+</button>
+
+<div class="">
+  <h3 class="font-medium my-4">Audio Input Devices</h3>
+  <app-audio-devices></app-audio-devices>
+</div>

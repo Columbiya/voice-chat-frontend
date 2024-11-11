@@ -1,0 +1,8 @@
+@if (errorService.$error | async; as error) {
+<div
+  class="fixed top-0 right-0 z-20 bg-red-600 text-white p-3 w-[450px] flex justify-between">
+  <span>{{ error }}</span>
+
+  <button (click)="close()">&times;</button>
+</div>
+}

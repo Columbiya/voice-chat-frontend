@@ -1,0 +1,12 @@
+<div class="">
+  @for (device of devices; track device.deviceId) {
+  <div
+    [class.bg-blue-400]="activeDeviceId() === device.deviceId"
+    [class.text-white]="activeDeviceId() === device.deviceId"
+    class="hover:bg-blue-400 hover:text-white p-4 cursor-pointer">
+    <button (click)="changeActiveAudioDevice(device.deviceId)">
+      {{ device.label }}
+    </button>
+  </div>
+  }
+</div>
