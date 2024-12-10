@@ -1,21 +1,29 @@
 import { inject, Injectable } from '@angular/core';
-import { ChatModel } from '../../models/chat.model';
-import { catchError, delay, Observable, throwError } from 'rxjs';
-import { chats } from '../../data/chats';
+import { catchError, delay, throwError } from 'rxjs';
 import { ErrorService } from '../error-service/error.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ChatSocketService } from '../chat-socket-service/chat-socket.service';
+import { ChatModel } from '../../models/chat.model';
 
 @Injectable({ providedIn: 'root' })
 export class ChatsService {
-  // private httpClient = inject(HttpClient)
-  //   private baseUrl = 'https://jsonplaceholder.typicode.com';
+  private httpClient = inject(HttpClient);
+  private baseUrl = 'http://localhost:3000';
   private errorService = inject(ErrorService);
+  private chatSocketService = inject(ChatSocketService);
 
   getAll() {
-    return new Observable<ChatModel[]>((subscriber) => {
-      subscriber.next(chats);
-      subscriber.complete();
-    }).pipe(delay(2000), catchError(this.handleError.bind(this)));
+    return this.httpClient
+      .get<ChatModel[]>(`${this.baseUrl}/rooms`)
+      .pipe(delay(2000), catchError(this.handleError.bind(this)));
+  }
+
+  joinRoom(roomId: string) {
+    this.chatSocketService.emit('joinRoom', roomId);
+  }
+
+  leaveRoom() {
+    this.chatSocketService.emit('leaveRoom');
   }
 
   private handleError(err: HttpErrorResponse) {

@@ -1,4 +1,4 @@
-<div class="flex gap-6 mb-4">
+<div class="flex gap-6 mb-4 flex-wrap">
   @for (user of chatUsers(); track user.id) {
   <app-chat-user [user]="user"></app-chat-user>
   }
@@ -14,7 +14,4 @@
     alt="microphone {{ isMicOn() ? 'on' : 'off' }}" />
 </button>
 
-<div class="">
-  <h3 class="font-medium my-4">Audio Input Devices</h3>
-  <app-audio-devices></app-audio-devices>
-</div>
+<app-audio-devices></app-audio-devices>

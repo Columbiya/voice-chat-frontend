@@ -1,10 +1,27 @@
-<div class="">
-  @for (device of devices; track device.deviceId) {
+<h3 class="font-medium my-4">Audio Input Devices</h3>
+
+<div>
+  @for (device of inputDevices; track device.deviceId) {
   <div
     [class.bg-blue-400]="activeDeviceId() === device.deviceId"
     [class.text-white]="activeDeviceId() === device.deviceId"
     class="hover:bg-blue-400 hover:text-white p-4 cursor-pointer">
-    <button (click)="changeActiveAudioDevice(device.deviceId)">
+    <button (click)="changeAudioInputDevice(device.deviceId)">
+      {{ device.label }}
+    </button>
+  </div>
+  }
+</div>
+
+<h3 class="font-medium my-4">Audio Output Devices</h3>
+
+<div>
+  @for (device of outputDevices; track device.deviceId) {
+  <div
+    [class.bg-blue-400]="activeDeviceId() === device.deviceId"
+    [class.text-white]="activeDeviceId() === device.deviceId"
+    class="hover:bg-blue-400 hover:text-white p-4 cursor-pointer">
+    <button (click)="changeAudioInputDevice(device.deviceId)">
       {{ device.label }}
     </button>
   </div>

@@ -9,5 +9,5 @@ import { RouterLink } from '@angular/router';
   templateUrl: './chat-item.component.html',
 })
 export class ChatItemComponent {
-  @Input() chat: ChatModel & { usersAmount: number };
+  @Input() chat: ChatModel;
 }

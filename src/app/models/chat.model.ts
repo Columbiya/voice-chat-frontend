@@ -1,5 +1,5 @@
 export interface ChatModel {
   id: string;
-  img?: string;
   name: string;
+  users_count: number;
 }

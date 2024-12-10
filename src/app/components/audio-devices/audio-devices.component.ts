@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Device } from './types';
 import { MediaService } from '../../services/media-service/media.service';
 
@@ -12,7 +12,8 @@ export class AudioDevicesComponent implements OnInit {
   // @Input() mediaTracks: MediaStreamTrack[];
   private mediaService = inject(MediaService);
 
-  devices: Device[] = [];
+  inputDevices: Device[] = [];
+  outputDevices: Device[] = [];
 
   activeDeviceId = signal('');
 
@@ -22,8 +23,14 @@ export class AudioDevicesComponent implements OnInit {
     // а на момент как я его запрашиваю здесь его еще нет
     await this.mediaService.getAllExistentDevices();
 
-    this.devices =
+    this.inputDevices =
       this.mediaService.audioInputDevices?.map(d => ({
+        deviceId: d.deviceId,
+        label: d.label,
+      })) ?? [];
+
+    this.outputDevices =
+      this.mediaService.audioOutputDevices?.map(d => ({
         deviceId: d.deviceId,
         label: d.label,
       })) ?? [];
@@ -33,7 +40,11 @@ export class AudioDevicesComponent implements OnInit {
     );
   }
 
-  changeActiveAudioDevice(deviceId: string) {
+  changeAudioInputDevice(deviceId: string) {
     this.mediaService.changeAudioInputDevice(deviceId);
+  }
+
+  changeAudioOutputDevice(deviceId: string) {
+    this.mediaService.changeAudioOutputDevice(deviceId);
   }
 }
